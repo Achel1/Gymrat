@@ -1,0 +1,18 @@
+{% extends "index.html" %}
+{% block title %}
+Detalle de Asistencia
+{% endblock %}
+{% block contenidoQueCambia %}
+<section class="fondo-gris text-center">
+    <h1>Detalle de Asistencia</h1>
+    <div class="detalle">
+        <p><strong>Miembro:</strong> {{ object.miembro }}</p>
+        <p><strong>Fecha:</strong> {{ object.fecha }}</p>
+    </div>
+
+    <a href="{% url 'ActualizarAsistencia' object.pk %}" class="btn btn-primary">Editar</a> |
+    <a href="{% url 'EliminarAsistencia' object.pk %}" class="btn btn-danger">Eliminar</a>
+    <button onclick="window.history.back();" class="btn btn-secondary d-block mx-auto mt-4">Volver a
+        asistencias</button>
+</section>
+{% endblock %}

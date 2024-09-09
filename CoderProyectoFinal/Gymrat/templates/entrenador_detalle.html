@@ -1,0 +1,19 @@
+{% extends "index.html" %}
+{% block title %}
+Detalle del Entrenador
+{% endblock %}
+{% block contenidoQueCambia %}
+<section class="fondo-gris text-center">
+    <h1>Detalle del Entrenador</h1>
+    <div class="detalle">
+        <p><strong>Nombre:</strong> {{ object.nombre }}</p>
+        <p><strong>Especialidad:</strong> {{ object.especialidad }}</p>
+        <p><strong>Experiencia:</strong> {{ object.experiencia }}</p>
+    </div>
+
+    <a href="{% url 'ActualizarEntrenador' object.pk %}" class="btn btn-primary">Editar</a> |
+    <a href="{% url 'EliminarEntrenador' object.pk %}" class="btn btn-danger">Eliminar</a>
+    <button onclick="window.history.back();" class="btn btn-secondary d-block mx-auto mt-4">Volver a
+        entrenadores</button>
+</section>
+{% endblock %}

@@ -1,0 +1,23 @@
+{% extends "index.html" %}
+
+{% block title %}
+Detalle del Plan
+{% endblock %}
+
+{% block contenidoQueCambia %}
+<section class="fondo-gris text-center">
+    <h1>Detalle del Plan</h1>
+    <div class="detalle">
+        <p><strong>Nombre:</strong> {{ object.nombre }}</p>
+        <p><strong>Descripción:</strong> {{ object.descripcion }}</p>
+        <p><strong>Duración:</strong> {{ object.duracion }}</p>
+    </div>
+
+    <a href="{% url 'ActualizarPlan' object.pk %}" class="btn btn-primary">Editar</a> |
+    <a href="{% url 'EliminarPlan' object.pk %}" class="btn btn-danger">Eliminar</a>
+    <br>
+    <br>
+    <a href="{% url 'inicio' %}" class="btn btn-secondary">Volver al inicio</a>
+    <button onclick="window.history.back();" class="btn btn-secondary">Atrás</button>
+</section>
+{% endblock %}

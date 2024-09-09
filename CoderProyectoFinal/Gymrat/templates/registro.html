@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+{% load static %}
+
+<html lang="es">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link
+        href="https://fonts.googleapis.com/css?family=Poppins:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i&display=swap"
+        rel="stylesheet">
+    <title>Registro</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap.min.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/font-awesome.css' %}">
+    <link rel="stylesheet" href="{% static 'css/templatemo-training-studio.css' %}">
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+</head>
+
+<body>
+    <header class="header-area header-sticky">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <nav class="main-nav">
+                        <p class="logo">Gym<em> rat</em></p>
+                        <span class="horaActual">Hora actual: <span id="reloj"></span></span>
+                        <script>
+                            function actualizarHora() {
+                                var fecha = new Date();
+                                var horas = fecha.getHours();
+                                var minutos = fecha.getMinutes();
+                                var segundos = fecha.getSeconds();
+                                if (minutos < 10) minutos = '0' + minutos;
+                                if (segundos < 10) segundos = '0' + segundos;
+                                var horaActual = horas + ":" + minutos + ":" + segundos;
+                                document.getElementById('reloj').innerHTML = horaActual;
+                            }
+                            setInterval(actualizarHora, 1000);
+                        </script>
+                        <ul class="nav">
+                            <li class="scroll-to-section"><a href="{% url 'inicio' %}" class="active">Inicio</a></li>
+                            {% if user.is_authenticated %}
+                            <li class="main-button"><a href="{% url 'logout' %}">Cerrar sesión</a></li>
+                            {% else %}
+                            <li class="main-button"><a href="{% url 'login' %}">Iniciar sesión</a></li>
+                            {% endif %}
+                        </ul>
+                        <a class='menu-trigger'>
+                            <span>Menu</span>
+                        </a>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <section class="section fondo-gris">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-6 col-md-8">
+                    <div class="login-form p-4 rounded shadow">
+                        <h2 class="text-center mb-4">Crear una cuenta</h2>
+                        <form method="post">
+                            {% csrf_token %}
+                            {{ form.as_p }}
+                            <button type="submit" class="btn btn-success btn-block">Registrar</button>
+                        </form>
+                        <p class="my-3 text-center">
+                            <a href="{% url 'login' %}">¿Ya tienes cuenta? Inicia sesión aquí</a>
+                        </p>
+                        <p class="text-center">
+                            <a href="{% url 'inicio' %}" class="btn btn-secondary">Inicio</a>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
+</body>
+
+</html>

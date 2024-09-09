@@ -1,0 +1,20 @@
+{% extends "index.html" %}
+
+{% block title %}
+Eliminar Plan
+{% endblock %}
+
+{% block contenidoQueCambia %}
+<section class="fondo-gris text-center">
+    <h1>Eliminar Plan</h1>
+    <div class="alert alert-danger" role="alert">
+        <p>¿Estás seguro de que deseas eliminar el plan "<strong>{{ object.nombre }}</strong>"?</p>
+        <form method="post" class="mt-3">
+            {% csrf_token %}
+            <button type="submit" class="btn btn-danger">Eliminar</button>
+        </form>
+    </div>
+    <a href="{% url 'ListaPlan' %}" class="btn btn-secondary">Volver a la Lista</a>
+    <button onclick="window.history.back();" class="btn btn-secondary">Atrás</button>
+</section>
+{% endblock %}

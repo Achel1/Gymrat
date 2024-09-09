@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sesión Cerrada</title>
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+</head>
+
+<body>
+    <div class="container">
+        <h1>¡Has cerrado sesión exitosamente!</h1>
+        <p>Gracias por visitarnos. ¡Esperamos verte pronto!</p>
+        <a href="{% url 'inicio' %}">
+            <button class="btn-volver">Volver al inicio</button>
+        </a>
+    </div>
+</body>
+
+</html>

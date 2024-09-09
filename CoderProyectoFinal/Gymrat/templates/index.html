@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+{% load static %}
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link
+        href="https://fonts.googleapis.com/css?family=Poppins:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i&display=swap"
+        rel="stylesheet">
+    <title> {% block title %} GYM Rat {% endblock %}</title>
+    <link rel="stylesheet" type="text/css" href="{% static '/css/bootstrap.min.css'%}">
+    <link rel="stylesheet" type="text/css" href="{% static '/css/font-awesome.css'%}">
+    <link rel="stylesheet" href="{% static '/css/templatemo-training-studio.css'%}">
+    <link rel="stylesheet" href="{% static '/css/styles.css'%}">
+</head>
+
+<body>
+    <header class="header-area header-sticky">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <nav class="main-nav">
+                        <p href="inicio" class="logo">Gym<em> rat</em></p>
+                        <span class="horaActual">Hora actual: <span id="reloj"></span></span>
+                        <script>
+                            function actualizarHora() {
+                                var fecha = new Date();
+                                var horas = fecha.getHours();
+                                var minutos = fecha.getMinutes();
+                                var segundos = fecha.getSeconds();
+                                if (minutos < 10) minutos = '0' + minutos;
+                                if (segundos < 10) segundos = '0' + segundos;
+                                var horaActual = horas + ":" + minutos + ":" + segundos;
+                                document.getElementById('reloj').innerHTML = horaActual;
+                            }
+                            setInterval(actualizarHora, 1000);
+                        </script>
+                        <ul class="nav">
+                            <li class="scroll-to-section"><a href="{% url 'inicio' %}" class="active">Inicio</a></li>
+                            <!-- <li class="scroll-to-section"><a href="#features">Acerca de mi</a></li> -->
+                            <li class="scroll-to-section"><a href="{% url 'Entrenador' %}">Entrenador</a></li>
+                            <li class="scroll-to-section"><a href="{% url 'ListaAsistencia' %}">Asistencia</a></li>
+                            <li class="scroll-to-section"><a href="{% url 'ListaClase' %}">Clases</a></li>
+                            <li class="scroll-to-section"><a href="{% url 'ListaPlan' %}">Plan</a></li>
+                            {% if user.is_authenticated %}
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                                    aria-expanded="false">
+                                    {% if user.miembro.avatar %}
+
+                                    <img src="{{ user.miembro.avatar.url }}" alt="avatar" class="profile-avatar"
+                                        height="40px" width="40px" style="border-radius: 50%; margin-top: -15px;">
+
+                                    {% else %}
+                                    <img src="{% static '/images/generic-user-icon.jpg'%}" alt="avatar"
+                                        class="profile-avatar" height="40px" width="40px"
+                                        style="border-radius: 50%; margin-top: -15px;">
+
+                                    {% endif %}
+
+                                </a>
+                                <ul class="dropdown-menu dropdown-menu-">
+
+                                    <li><a class="dropdown-item" href="{% url 'editar_usuario' %}">Editar Perfil</a>
+                                    </li>
+                                    <li><a class="dropdown-item" href="#"></a></li>
+                                </ul>
+                            </li>
+                            <li class="main-button">
+                                <form method="POST" action="{% url 'logout' %}">
+                                    {% csrf_token %}
+                                    <button type="submit" class="btn btn-danger">Cerrar sesión</button>
+                                </form>
+                            </li>
+                            {% else %}
+                            <li class="main-button">
+                                <a href="{% url 'login' %}" class="btn">Iniciar sesión</a>
+                            </li>
+                            {% endif %}
+
+                        </ul>
+                        <a class='menu-trigger'>
+                            <span>Menu</span>
+                        </a>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    {% block contenidoQueCambia %}
+
+    <div class="main-banner" id="top">
+        <video autoplay muted loop id="bg-video">
+            <source src="{% static '/images/gym-video.mp4' %}" type="video/mp4" />
+        </video>
+
+        <div class="video-overlay header-text">
+            <div class="caption">
+                {% if user.is_authenticated %}
+                <h6>¡Hola {{ user.username }}! Bienvenido</h6>
+                {% else %}
+                <h6>¡Hola invitado! Bienvenido</h6>
+                {% endif %}
+
+                <h2>A mi primera página web de <em>coderhouse</em></h2>
+                <div class="main-button scroll-to-section">
+                    <a href="#features">Acerca de mí</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <section class="section" id="features">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6 offset-lg-3">
+                    <div class="section-heading">
+                        <h2>Acerca de mi soy</h2>
+                        <h2><em> Manuel Lopez</em></h2>
+                        <li class="scroll-to-section"><a href="#top" class="active">Inicio</a></li>
+
+                        <h4>Mi nombre es Manuel López y tengo 27 años. Me complace enormemente presentarte este
+                            proyecto,
+                            el cual representa un hito significativo en mi camino en el mundo de la programación. Este
+                            es mi primer curso de Python, y estoy emocionado de haber llegado a este punto,
+                            sumergiéndome en el fascinante universo del desarrollo web.</h4>
+                        <h4>Este proyecto marca mi primera incursión en el uso de Django para construir una aplicación
+                            web. A lo largo de este curso, he aprendido y aplicado nuevas habilidades que me han
+                            permitido desarrollar y diseñar esta web con la que espero lograr un impacto positivo. Cada
+                            línea de código, cada funcionalidad implementada, ha sido una oportunidad para crecer y
+                            mejorar en esta nueva aventura.</h4>
+                        <h4>Muchas gracias
+
+                        </h4>
+                        <h4>Manuel López</h4>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    {% endblock %}
+    <footer>
+        <div class="container text-center">
+            <a href="https://github.com/Achel1" target="_blank">
+                <img src="{% static '/images/github-icon.png' %}" alt="GitHub" class="social-icon" height="40px"
+                    width="40px">
+                Mi GitHub
+            </a>
+        </div>
+    </footer>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-..."
+        crossorigin="anonymous"></script>
+
+</body>
+
+</html>

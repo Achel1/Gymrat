@@ -1,0 +1,18 @@
+{% extends "index.html" %}
+{% block title %}
+Crear Asistencia
+{% endblock %}
+
+{% block contenidoQueCambia %}
+<section class="fondo-gris text-center">
+    <h1>Crear Asistencia</h1>
+    <form method="post" class="form-group">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="btn btn-success">Guardar</button>
+    </form>
+    <br>
+    <a href="{% url 'inicio' %}"><button class="btn btn-secondary">Volver al inicio</button></a>
+    <button onclick="window.history.back();" class="btn btn-secondary">Atrás</button>
+</section>
+{% endblock %}
