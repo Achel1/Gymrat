@@ -117,10 +117,9 @@ body {
     margin: 0 auto !important;
 }
 
-/* Estilo para el footer */
-footer {
+Estilo para el footer footer {
     background-color: #333;
-    padding: 50px 0;
+    padding: 10px 0;
     position: fixed;
     bottom: 0;
     width: 100%;
